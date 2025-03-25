@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Commerce - Login & Signup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 400px;
+      width: 100%;
+    }
+    .header {
+      background: #dedb00;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+    .form-container {
+      padding: 2rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    input {
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 0.75rem;
+      background: #8ad841;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background: #3700b3;
+    }
+    .toggle {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .toggle a {
+      color: #6200ea;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header" id="formHeader">Login</div>
+    <div class="form-container">
+      <form id="authForm">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Submit</button>
+      </form>
+      <div class="toggle">
+        <span id="toggleText">Don't have an account?</span> 
+        <a href="#" id="toggleLink">Sign up</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const formHeader = document.getElementById("formHeader");
+    const authForm = document.getElementById("authForm");
+    const toggleText = document.getElementById("toggleText");
+    const toggleLink = document.getElementById("toggleLink");
+
+    let isLogin = true;
+
+    // Toggle between Login and Signup
+    toggleLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      isLogin = !isLogin;
+
+      if (isLogin) {
+        formHeader.textContent = "Login";
+        toggleText.textContent = "Don't have an account?";
+        toggleLink.textContent = "Sign up";
+      } else {
+        formHeader.textContent = "Sign Up";
+        toggleText.textContent = "Already have an account?";
+        toggleLink.textContent = "Login";
+      }
+    });
+
+    // Handle form submission
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(authForm);
+      const data = Object.fromEntries(formData.entries());
+      console.log(isLogin ? "Login Data:" : "Signup Data:", data);
+
+      // Add your backend API integration here
+      alert(`${isLogin ? "Login" : "Signup"} successful!`);
+    });
+  </script>
+</body>
+</html>
